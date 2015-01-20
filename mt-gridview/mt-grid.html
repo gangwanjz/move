@@ -1,0 +1,71 @@
+<script src="mt-grid.js"></script>
+<polymer-element name="mt-grid" attributes="data model" contructor="MTGrid">
+    <template>
+        <link rel="stylesheet" href="mt-grid.css">
+        <div  id="grid" class="grid">
+            <div id="topPanel" class="topPanel">
+                <div id="headerContainer" class="headerContainer">
+                    <div id="headerScroller" class="headerScroller">
+                        <template repeat="{{column in columns}}">
+                            <div class="headerCell {{column.cellClass}} col{{column.index}} colt{{column.index}}">
+                                <div class="verticalBar verticalBarVisible">&nbsp;</div>
+                                <div header-cell column-index="{{column.index}}">
+                                    <!-- 排序和固定的icon -->
+                                    <div class="headerSortColumn" column-index="{{column.index}}" style="cursor: pointer;" draggable="true">
+                                        <div on-click="{{sortHandler}}"  class="headerText ng-binding colt{{column.index}}">{{column.label}}</div>
+                                        <div class="sortButtonDown hide" on-click="{{sortHandler}}" ></div>
+                                        <div class="sortButtonUp hide" on-click="{{sortHandler}}" ></div>
+                                        <div class="sortPriority ng-binding"></div>
+                                        <div on-click="{{togglePin}}" class="{{column.pinnable?'':'hide'}} {{column.pinned?'pinnedIcon':'unPinnedIcon'}}"></div>
+                                    </div>
+                                    <!--  拖拽的控制图标 -->
+                                    <div class="headerGrip" on-mousedown="{{gripOnMouseDown}}" on-mouseup="{{gripOnMouseUp}}"></div>
+                                </div>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+            </div>
+            <div id="viewport" class="viewport">
+                <div id="canvas" class="canvas" >
+                    <template repeat="{{row in rows}}">
+                        <div class="row {{row.rowClass}}"  style="top:{{row.top}}px;height:{{row.height}}px;">
+                            <template repeat="{{col in columns}}">
+                                <div  class="cell {{col.cellClass}} col{{col.index}} colt{{col.index}}" style="cursor: pointer;">
+                                    <div class="verticalBar verticalBarVisible" >&nbsp;</div>
+                                    <div cell>
+                                        <div class="cellText  pinned col{{col.index}} colt{{col.index}}">
+                                            <span ng-cell-text="" class="ng-binding">{{row.data[col.code]}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        /**
+         * 表格显示的数据
+         * [{id:"100",name:'mid',company:"mt"}]
+         * @attribute data
+         * @type Array
+         * @default []
+         */
+
+        /**
+         * 界面显示结构
+         * {columns:[{code:'id',label:'主键',sortable:'1'},...],labelFunc:"labelFunction",idField:"id"}
+         * @attribute model
+         * @type Object
+         * @default {}
+         */
+
+        Polymer(mtGrid);
+    </script>
+</polymer-element>

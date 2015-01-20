@@ -1,0 +1,63 @@
+<script src="mt-grid.js"></script>
+<polymer-element name="mt-grid" attributes="data model" contructor="MTGrid">
+    <template>
+        <link rel="stylesheet" href="mt-grid.css">
+        <div  id="grid" class="grid grid1421488895716">
+            <div id="topPanel" class="topPanle" style="width:600px;height: 30px">
+                <div id="headerContainer" class="headerContainer" style="width:600px;height:30px">
+                    <div id="headerScroller" class="headerScroller" style="height: 30px;">
+                        <div class="headerCell col0 colt0" style="height: 30px">
+                            <div class="verticalBar verticalBarVisible"  style="height: 30px;">&nbsp;</div>
+                            <div header-cell>
+                                <!-- 排序和固定的icon -->
+                                <div class="headerSortColumn"  style="cursor: pointer;" draggable="true">
+                                    <div on-click=""  class="headerText ng-binding colt0">name</div>
+                                    <div class="sortButtonDown" on-click="" on-show="" style="display: none;"></div>
+                                    <div class="sortButtonUp" on-click="" on-show="" style="display: none;"></div>
+                                    <div class="sortPriority ng-binding"></div>
+                                    <div on-click="" on-show="" class="pinnedIcon"></div>
+                                </div>
+                                <!--  拖拽的控制图标 -->
+                                <div on-show="" class="headerGrip" on-click="col.gripClick()" on-mousedown="col.gripOnMouseDown()" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="viewport" class="viewport" style="width: 600px; height: 268px;">
+                <div id="canvas" class="canvas" style="height: 60px">
+                    <div class="row even" style="top:0px;height: 30px;">
+                        <div  class="cell  pinned col0 colt0" style="cursor: pointer;">
+                            <div class="verticalBar verticalBarVisible" style="height: 30px;">&nbsp;</div>
+                            <div cell>
+                                <div class="cellText  pinned col0 colt0">
+                                    <span ng-cell-text="" class="ng-binding">Moroni</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        /**
+         * 表格显示的数据
+         * [{id:"100",name:'mid',company:"mt"}]
+         * @attribute data
+         * @type Array
+         * @default []
+         */
+
+        /**
+         * 界面显示结构
+         * {columns:[{code:'id',label:'主键',sortable:'1'},...],labelFunc:"labelFunction",idField:"id"}
+         * @attribute model
+         * @type Object
+         * @default {}
+         */
+
+        Polymer(mtGrid);
+    </script>
+</polymer-element>
